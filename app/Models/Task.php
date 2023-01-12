@@ -9,5 +9,11 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["text"];
+    protected $fillable = ["text", "title", "importance_id"];
+    // 配列で値を一括設定する
+
+    public function importance()
+    {
+        return $this->belongsTo(Importance::class);
+    }
 }

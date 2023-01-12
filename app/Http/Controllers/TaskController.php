@@ -4,25 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreTaskRequest;
+use App\Models\Importance;
 use App\Models\Task;
 
 class TaskController extends Controller
 {
     public function index()
     {
-        return view("tasks.index");
+        $tasks = Task::all();
+        $importances = Importance::all();
+
+        return view("tasks.index", ["tasks" => $tasks, "importances" => $importances]);
         
     }
 
 
     public function create()
     {
-        return view("tasks.create");
+        $importances = Importance::all();
+        return view("tasks.create", [ "importances" => $importances]);
     }
 
 
     public function store(StoreTaskRequest $request)
     {
+        // 一括代入
         $task = new Task($request->validated());
         $task->save();
 
