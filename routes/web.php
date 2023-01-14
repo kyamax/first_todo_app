@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -30,3 +31,6 @@ Route::delete("/tasks/{task}", [TaskController::class, "destroy"])->name("tasks.
 
 Route::get("/users/create", [UserController::class, "create"])->name("users.create");
 Route::post("/users", [UserController::class, "store"])->name("users.store");
+
+Route::get("/users/login", [AuthController::class, "loginForm"])->name("users.login");
+Route::post("/users/login", [AuthController::class, "login"]);
