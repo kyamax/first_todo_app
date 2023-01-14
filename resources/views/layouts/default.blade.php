@@ -12,6 +12,9 @@
       <div class="container px-4 mx-auto">
         <a class="title" href="/tasks/index">TO DO</a>
       </div>
+      <div class="user-header">
+        <a class="user-icon" href="/">{{ Illuminate\Support\Facades\Auth::user()->name }}</a>
+      </div>
   </header>
   <main>
     @yield('content')

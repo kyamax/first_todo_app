@@ -6,15 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreTaskRequest;
 use App\Models\Importance;
 use App\Models\Task;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
     public function index()
     {
         $tasks = Task::all();
+        $user = Auth::user();
         $importances = Importance::all();
 
-        return view("tasks.index", ["tasks" => $tasks, "importances" => $importances]);
+        return view("tasks.index", ["tasks" => $tasks, "importances" => $importances, "user" => $user]);
         
     }
 
