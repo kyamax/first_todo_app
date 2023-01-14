@@ -46,37 +46,30 @@ class TaskController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $task = Task::findOrFail($id);
+        $importances = Importance::all();
+
+        return view("tasks.edit", ["task" => $task, "importances" => $importances]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(StoreTaskRequest $request, $id)
     {
-        //
+        $task = Task::findOrFail($id);
+        $updateData = $request->validated();
+
+        $task->importance()->associate($updateData["importance_id"]);
+        $task->update($updateData);
+
+        return to_route("tasks.index")->with("success", "内容を更新しました");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $task = Task::findOrFail($id);
+        $task->delete();
+
+        return to_route("tasks.index")->with("success", "削除されました");
     }
 }

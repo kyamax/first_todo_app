@@ -10,7 +10,7 @@
 <body>
   <header>
       <div class="container px-4 mx-auto">
-        <a class="title" href="/">TO DO</a>
+        <a class="title" href="/tasks/index">TO DO</a>
       </div>
   </header>
   <main>
