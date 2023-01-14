@@ -24,4 +24,12 @@ class AuthController extends Controller
         return back()->onlyInput('email');
 
     }
+
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route("users.login");
+    }
 }
