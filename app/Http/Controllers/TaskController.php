@@ -32,6 +32,8 @@ class TaskController extends Controller
     {
         // 一括代入
         $task = new Task($request->validated());
+        // $task["user_id"] = $request->Auth::id();
+        $task->user_id = Auth::id();
         $task->save();
 
         return to_route("tasks.index")->with("success", "TODOを追加しました");
