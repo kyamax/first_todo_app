@@ -5,35 +5,38 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>@yield('title', 'TO DO')</title>
-  <link>
+  <link href="css/app.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/20a8b0685b.js" crossorigin="anonymous"></script>
+  @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
 </head>
 <body>
   <header>
-      <div class="container px-4 mx-auto">
-        <a class="title" href="/tasks/index">TO DO</a>
-      </div>
+    <nav class="navbar navbar-light bg-light px-4">
+      <h1>
+        <a class="navbar-brand" href="{{ route('tasks.index') }}">TODO App</a>
+      </h1>
+
       @auth
-        <div class="user-header">
-          <a class="user-icon" href="/">{{ Illuminate\Support\Facades\Auth::user()->name }}</a>
+      <div class="d-grid gap-2 d-md-block">
+        <div class="btn">
+          <a class="btn btn-primary btn-sm" href="/tasks/index" role="button">ホーム</a>
         </div>
-        <div class="user-header">
+        <div class="btn">
           <form action="{{ route('users.logout')}}" method="post">
-            @csrf
-            <button type="submit">ログアウト</button>
+          @csrf
+          <button type="submit" class="btn btn-primary btn-sm">ログアウト</button>
           </form>
         </div>
+      </div>
       @endauth
-      @guest
-        <div class="user-header">
-          <a class="user-icon" href="/users/login">ログイン</a>
-        </div>
-        <div class="user-header">
-          <a class="user-icon" href="/users/create">新規登録</a>
-        </div>
-      @endguest
+    </nav>
   </header>
+
   <main>
-    @yield('content')
+    <div class="container-fluid">
+        @yield('content')
+    </div>
   </main>
 </body>
 </html>
