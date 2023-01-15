@@ -1,5 +1,5 @@
 @extends('layouts.default')
-@section('title', 'TODOリスト')
+@section('title')
 @section('content')
 <section class="vh-100">
 
@@ -23,7 +23,7 @@
           <div class="card-header p-3">
             <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>Task List</h5>
           </div>
-          <div class="card-body" data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px">
+          <div class="card-body h-auto" >
             <table class="table mb-0">
               <thead>
                 <tr>
@@ -43,7 +43,7 @@
                   <td class="align-middle">
                     <a class="btn btn-primary btn-sm" href="{{ route('tasks.edit', ['task' => $task->id]) }}"><i class="fa-regular fa-pen-to-square"></i></a>
                   </td>
-                  <td>
+                  <td class="align-middle">
                     <form action="{{ route('tasks.destroy', ['task' => $task->id]) }}" method="POST">
                       @csrf
                       @method("DELETE")
@@ -54,12 +54,17 @@
                 @endforeach
               </tbody>
             </table>
-            
+            <div class="mt-3">
+              {{ $tasks->links('pagination::bootstrap-5') }}
+            </div>
           </div>
-          
+        
         </div>
+        
       </div>
+      
     </div>
   </div>
+  
 </section>
 @endsection

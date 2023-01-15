@@ -18,7 +18,7 @@ class TaskController extends Controller
                 if ($search = request('search')) {
                     $query->where('title', 'LIKE', "%{$search}%");
             }}]
-        ])->get();
+        ])->paginate(7);
 
 
         $user = Auth::user();
