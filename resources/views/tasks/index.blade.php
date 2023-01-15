@@ -5,6 +5,13 @@
 
 <div class="todo-form">
   <a class="task-create" href="{{ route('tasks.create') }}">TODOの追加</a>
+
+  <form class="form-inline">
+      <div class="form-group">
+      <input type="search" class="form-control mr-sm-2" name="search"  value="{{ request('search') }}" placeholder="キーワードを入力" >
+      </div>
+      <input type="submit" value="検索" class="btn btn-info">
+  </form>
   
 
   @foreach($tasks as $task)

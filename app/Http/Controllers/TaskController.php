@@ -12,7 +12,15 @@ class TaskController extends Controller
 {
     public function index()
     {
-        $tasks = Task::all();
+        $tasks = Task::where([
+            ["user_id", Auth::user()->id],
+            [function ($query){
+                if ($search = request('search')) {
+                    $query->where('title', 'LIKE', "%{$search}%");
+            }}]
+        ])->get();
+
+
         $user = Auth::user();
         $importances = Importance::all();
 
