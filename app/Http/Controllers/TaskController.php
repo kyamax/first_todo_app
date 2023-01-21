@@ -38,13 +38,11 @@ class TaskController extends Controller
 
     public function store(StoreTaskRequest $request)
     {
-        // 一括代入
         $task = new Task($request->validated());
-        // $task["user_id"] = $request->Auth::id();
         $task->user_id = Auth::id();
         $task->save();
 
-        return to_route("tasks.index")->with("success", "TODOを追加しました");
+        return to_route("tasks.index");
     }
 
     /**
@@ -74,7 +72,7 @@ class TaskController extends Controller
         $task->importance()->associate($updateData["importance_id"]);
         $task->update($updateData);
 
-        return to_route("tasks.index")->with("success", "内容を更新しました");
+        return to_route("tasks.index");
     }
 
     public function destroy($id)
@@ -82,6 +80,20 @@ class TaskController extends Controller
         $task = Task::findOrFail($id);
         $task->delete();
 
-        return to_route("tasks.index")->with("success", "削除されました");
+        return to_route("tasks.index");
+    }
+
+    public function check($id)
+    {
+        $task = Task::findOrFail($id);
+        // $task->check = ($task->check) ? 0 : 1;
+        if($task->check == true){
+            $task->check = false;
+        } else {
+            $task->check = true;
+        }
+        $task->save();
+        return to_route("tasks.index");
+
     }
 }

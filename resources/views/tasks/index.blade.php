@@ -27,6 +27,7 @@
             <table class="table mb-0">
               <thead>
                 <tr>
+                  <th scope="col">完了</th>
                   <th scope="col">TODO</th>
                   <th scope="col">Task</th>
                   <th scope="col">重要度</th>
@@ -37,6 +38,13 @@
               <tbody>
                 @foreach($tasks as $task)
                 <tr class="fw-normal">
+                  <td class="align-middle">
+                    <form action="{{ route('tasks.check', ['task' => $task->id]) }}" method="POST">
+                      @csrf
+                      @method("POST")
+                      <button class="btn btn-success btn-sm">Done</button>
+                    </form>
+                  </td>
                   <td class="align-middle">{{ $task->title }}</td>
                   <td class="align-middle">{{ $task->text }}</td>
                   <td class="align-middle">{{ $task->importance->name }}</td>

@@ -13,11 +13,11 @@
 <body>
   <header>
     <nav class="navbar navbar-light bg-light px-4">
-      @auth
+      
       <h1>
         <a class="navbar-brand" href="{{ route('tasks.index') }}">TODO App</a>
       </h1>
-      
+      @auth
       <div class="d-grid gap-2 d-md-block">
         <div class="btn">
           <a class="btn btn-outline-secondary btn-sm" href="/tasks/index" role="button">ホーム</a>

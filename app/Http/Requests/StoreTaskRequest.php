@@ -18,6 +18,7 @@ class StoreTaskRequest extends FormRequest
             'text' => ['required', 'string', 'max:255'],
             'title' => ['required', 'max:255'],
             'importance_id' => ['required', 'exists:importances,id'],
+            'check' => ['boolean'],
 
         ];
     }

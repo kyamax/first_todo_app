@@ -9,7 +9,7 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["text", "title", "importance_id", "user_id"];
+    protected $fillable = ["text", "title", "importance_id", "user_id", "check"];
     // 配列で値を一括設定する
 
     public function importance()
