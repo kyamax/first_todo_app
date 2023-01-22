@@ -24,12 +24,14 @@ Route::get('/', function () {
 
 // Route::resource("/tasks", TaskController::class)->except("show");
 Route::get("/tasks/index", [TaskController::class, "index"])->name("tasks.index")->middleware("auth");
+Route::get("/tasks/done", [TaskController::class, "done"])->name("tasks.done")->middleware("auth");
 Route::get("/tasks/create", [TaskController::class, "create"])->name("tasks.create")->middleware("auth");
 Route::post("/tasks/store", [TaskController::class, "store"])->name("tasks.store")->middleware("auth");
 Route::get("/tasks/{task}", [TaskController::class, "edit"])->name("tasks.edit")->middleware("auth");
 Route::put("/tasks/{task}", [TaskController::class, "update"])->name("tasks.update")->middleware("auth");
 Route::delete("/tasks/{task}", [TaskController::class, "destroy"])->name("tasks.destroy")->middleware("auth");
-Route::post("/tasks/{task}", [TaskController::class, "check"])->name("tasks.check");
+Route::post("/tasks/{task}", [TaskController::class, "check"])->name("tasks.check")->middleware("auth");
+
 
 Route::get("/users/create", [UserController::class, "create"])->name("users.create");
 Route::post("/users", [UserController::class, "store"])->name("users.store");

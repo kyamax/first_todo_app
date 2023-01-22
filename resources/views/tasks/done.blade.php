@@ -3,16 +3,8 @@
 @section('content')
 <section class="vh-100">
 
-  <div class="container col-md-7 col-xl-9 py-3" style="display: flex; justify-content: space-between;">
+  <div class="container col-md-7 col-xl-9 py-3">
     <a class="btn btn-danger btn-lg" href="{{ route('tasks.create') }}">TODOの追加</a>
-    <a class="btn btn-outline-success btn-lg" href="{{ route('tasks.done') }}"><i class="fa-regular fa-circle-check"></i> 完了したTODO</a>
-  </div>
-
-  <div class="container col-md-7 col-xl-9">
-    <form class="d-flex" role="search">
-      <input type="search" class="form-control me-2" name="search"  value="{{ request('search') }}" placeholder="キーワードを入力">
-      <input type="submit" class="btn btn-outline-primary flex-shrink-0" value="検索">
-    </form>
   </div>
 
 
@@ -28,7 +20,7 @@
             <table class="table mb-0">
               <thead>
                 <tr>
-                  <th scope="col">完了</th>
+                  <th scope="col">未完了にする</th>
                   <th scope="col">TODO</th>
                   <th scope="col">Task</th>
                   <th scope="col">重要度</th>
@@ -43,7 +35,7 @@
                     <form action="{{ route('tasks.check', ['task' => $task->id]) }}" method="POST">
                       @csrf
                       @method("POST")
-                      <button class="btn btn-outline-success flex-shrink-0 btn-sm">Done</button>
+                      <button class="btn btn-outline-success flex-shrink-0 btn-sm">Undone</button>
                     </form>
                   </td>
                   <td class="align-middle">{{ $task->title }}</td>

@@ -14,11 +14,12 @@ class TaskController extends Controller
     {
         $tasks = Task::where([
             ["user_id", Auth::user()->id],
+            ["check", false],
             [function ($query){
                 if ($search = request('search')) {
                     $query->where('title', 'LIKE', "%{$search}%");
             }}]
-        ])->paginate(7);
+        ])->orderBy('created_at', 'desc')->paginate(7);
 
 
         $user = Auth::user();
@@ -89,11 +90,26 @@ class TaskController extends Controller
         // $task->check = ($task->check) ? 0 : 1;
         if($task->check == true){
             $task->check = false;
+            $task->save();
+            return to_route("tasks.done");
         } else {
             $task->check = true;
+            $task->save();
+            return to_route("tasks.index");
         }
-        $task->save();
-        return to_route("tasks.index");
+    }
 
+    public function done()
+    {
+        $tasks = Task::where([
+            ["user_id", Auth::user()->id],
+            ["check", true]
+        ])->orderBy('created_at', 'desc')->paginate(7);
+
+        $user = Auth::user();
+        $importances = Importance::all();
+
+        return view("tasks.done", ["tasks" => $tasks, "importances" => $importances, "user" => $user]);
+        
     }
 }
