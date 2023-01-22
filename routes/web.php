@@ -22,16 +22,24 @@ Route::get('/', function () {
 });
 
 
-// Route::resource("/tasks", TaskController::class)->except("show");
-Route::get("/tasks/index", [TaskController::class, "index"])->name("tasks.index")->middleware("auth");
-Route::get("/tasks/done", [TaskController::class, "done"])->name("tasks.done")->middleware("auth");
-Route::get("/tasks/create", [TaskController::class, "create"])->name("tasks.create")->middleware("auth");
-Route::post("/tasks/store", [TaskController::class, "store"])->name("tasks.store")->middleware("auth");
-Route::get("/tasks/{task}", [TaskController::class, "edit"])->name("tasks.edit")->middleware("auth");
-Route::put("/tasks/{task}", [TaskController::class, "update"])->name("tasks.update")->middleware("auth");
-Route::delete("/tasks/{task}", [TaskController::class, "destroy"])->name("tasks.destroy")->middleware("auth");
-Route::post("/tasks/{task}", [TaskController::class, "check"])->name("tasks.check")->middleware("auth");
 
+Route::prefix("/tasks")
+    ->name("tasks.")
+    ->group(function(){
+        Route::middleware("auth")
+            ->group(function(){
+                // Route::resource("/tasks", TaskController::class)->except("show");
+                Route::get("/index", [TaskController::class, "index"])->name("index");
+                Route::get("/done", [TaskController::class, "done"])->name("done");
+                Route::get("/create", [TaskController::class, "create"])->name("create");
+                Route::post("/store", [TaskController::class, "store"])->name("store");
+                Route::get("/{task}", [TaskController::class, "edit"])->name("edit");
+                Route::put("/{task}", [TaskController::class, "update"])->name("update");
+                Route::delete("/{task}", [TaskController::class, "destroy"])->name("destroy");
+                Route::post("/{task}", [TaskController::class, "check"])->name("check");
+
+            });
+        });
 
 Route::get("/users/create", [UserController::class, "create"])->name("users.create");
 Route::post("/users", [UserController::class, "store"])->name("users.store");
