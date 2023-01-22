@@ -14,7 +14,7 @@
       <div class="col-md-12 col-xl-10">
         <div class="card">
           <div class="card-header p-3">
-            <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>TODO List</h5>
+            <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>完了済みのTODO List</h5>
           </div>
           <div class="card-body h-auto" >
             <table class="table mb-0">
