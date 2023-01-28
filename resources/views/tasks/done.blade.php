@@ -21,11 +21,11 @@
             <table class="table mb-0">
               <thead>
                 <tr>
-                  <th scope="col">未完了にする</th>
+                  <th scope="col">戻す</th>
                   <th scope="col">TODO</th>
                   <th scope="col">@sortablelink('importance_id', '重要度')</th>
-                  <th scope="col">編集</th>
-                  <th scope="col">削除</th>
+                  <th scope="col" class="d-none d-md-table-cell">編集</th>
+                  <th scope="col" class="d-none d-md-table-cell">削除</th>
                 </tr>
               </thead>
               <tbody>
@@ -42,10 +42,10 @@
                     <a href="{{ route('tasks.show', ['task' => $task->id]) }}">{{ $task->title }}</a>
                   </td>
                   <td class="align-middle">{{ $task->importance->name }}</td>
-                  <td class="align-middle">
+                  <td class="align-middle d-none d-md-table-cell">
                     <a class="btn btn-primary btn-sm" href="{{ route('tasks.edit', ['task' => $task->id]) }}"><i class="fa-regular fa-pen-to-square"></i></a>
                   </td>
-                  <td class="align-middle">
+                  <td class="align-middle d-none d-md-table-cell">
                     <form action="{{ route('tasks.destroy', ['task' => $task->id]) }}" method="POST">
                       @csrf
                       @method("DELETE")
