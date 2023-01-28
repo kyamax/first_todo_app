@@ -31,6 +31,7 @@ Route::prefix("/tasks")
                 // Route::resource("/tasks", TaskController::class)->except("show");
                 Route::get("/index", [TaskController::class, "index"])->name("index");
                 Route::get("/done", [TaskController::class, "done"])->name("done");
+                Route::get("/show/{task}", [TaskController::class, "show"])->name("show");
                 Route::get("/create", [TaskController::class, "create"])->name("create");
                 Route::post("/store", [TaskController::class, "store"])->name("store");
                 Route::get("/{task}", [TaskController::class, "edit"])->name("edit");

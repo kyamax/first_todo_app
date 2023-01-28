@@ -30,7 +30,6 @@
                 <tr>
                   <th scope="col">完了</th>
                   <th scope="col">TODO</th>
-                  <th scope="col">Task</th>
                   <th scope="col">重要度</th>
                   <th scope="col">編集</th>
                   <th scope="col">削除</th>
@@ -46,9 +45,12 @@
                       <button class="btn btn-outline-success flex-shrink-0 btn-sm">Done</button>
                     </form>
                   </td>
-                  <td class="align-middle">{{ $task->title }}</td>
-                  <td class="align-middle">{{ $task->text }}</td>
+                  
+                  <td class="align-middle">
+                    <a href="{{ route('tasks.show', ['task' => $task->id]) }}">{{ $task->title }}</a>
+                  </td>
                   <td class="align-middle">{{ $task->importance->name }}</td>
+                  
                   <td class="align-middle">
                     <a class="btn btn-primary btn-sm" href="{{ route('tasks.edit', ['task' => $task->id]) }}"><i class="fa-regular fa-pen-to-square"></i></a>
                   </td>

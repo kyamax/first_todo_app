@@ -46,15 +46,12 @@ class TaskController extends Controller
         return to_route("tasks.index");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $task = Task::findOrFail($id);
+        $importances = Importance::all();
+        
+        return view("tasks.show", ["task" => $task, "importances" => $importances]);
     }
 
     public function edit($id)
@@ -87,7 +84,6 @@ class TaskController extends Controller
     public function check($id)
     {
         $task = Task::findOrFail($id);
-        // $task->check = ($task->check) ? 0 : 1;
         if($task->check == true){
             $task->check = false;
             $task->save();
