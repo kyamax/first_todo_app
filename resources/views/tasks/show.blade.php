@@ -34,32 +34,23 @@
             </div>
           </div>
 
-
           <div class="card-body h-auto" >
-
-          <div class="col-mb-0 mt-3 border-bottom">
-            <h3 class="form-label">TODO</h3>
-            <div class="fs-4 px-3"> {{$task->title }}</div>
+            <div class="col-mb-0 mt-3 border-bottom">
+              <h3 class="form-label">TODO</h3>
+              <div class="fs-5 px-3"> {{$task->title }}</div>
+            </div>
+            <div class="col-mb-0 mt-3 border-bottom">
+              <h3 class="form-label">内容</h3>
+              <div class="fs-5 px-3"> {{$task->text }}</div>
+            </div>
+            <div class="col-mb-0 mt-3">
+              <h4 class="form-label">重要度</h4>
+              <div class="fs-5 px-3"> {{$task->importance->name }}</div>
+            </div>
           </div>
-
-          <div class="col-mb-0 mt-3 border-bottom">
-            <h3 class="form-label">内容</h3>
-            <div class="fs-4 px-3"> {{$task->text }}</div>
-          </div>
-
-          <div class="col-mb-0 mt-3">
-            <h4 class="form-label">重要度</h4>
-            <div class="fs-4 px-3"> {{$task->importance->name }}</div>
-          </div>
-
-            
-
-          </div>
-        
+          
         </div>
-        
       </div>
-      
     </div>
   </div>
   
