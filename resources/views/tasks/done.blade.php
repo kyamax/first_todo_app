@@ -22,7 +22,6 @@
                 <tr>
                   <th scope="col">未完了にする</th>
                   <th scope="col">TODO</th>
-                  <th scope="col">Task</th>
                   <th scope="col">重要度</th>
                   <th scope="col">編集</th>
                   <th scope="col">削除</th>

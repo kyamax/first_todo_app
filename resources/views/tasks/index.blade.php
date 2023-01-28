@@ -9,8 +9,8 @@
   </div>
 
   <div class="container col-md-7 col-xl-9">
-    <form class="d-flex" role="search">
-      <input type="search" class="form-control me-2" name="search"  value="{{ request('search') }}" placeholder="キーワードを入力">
+    <form class="d-flex" action="{{ route('tasks.index') }}" method="GET">
+      <input type="search" class="form-control me-2" name="search"  value="{{ $search }}" placeholder="キーワードを入力">
       <input type="submit" class="btn btn-outline-primary flex-shrink-0" value="検索">
     </form>
   </div>
@@ -42,7 +42,7 @@
                     <form action="{{ route('tasks.check', ['task' => $task->id]) }}" method="POST">
                       @csrf
                       @method("POST")
-                      <button class="btn btn-outline-success flex-shrink-0 btn-sm">Done</button>
+                      <button class="btn btn-outline-success flex-shrink-0 btn-sm" id="done_btn">Done</button>
                     </form>
                   </td>
                   
@@ -71,6 +71,17 @@
           </div>
         
         </div>
+        <!-- <div>
+          <button id="btn">btn</button>
+        </div>
+        <script>
+          $(()=>{
+            alert("click");
+          });
+          // $('#btn').click(()=>{
+          //   alert("click");
+          // });
+        </script> -->
         
       </div>
       
