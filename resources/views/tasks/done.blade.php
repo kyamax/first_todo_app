@@ -3,8 +3,9 @@
 @section('content')
 <section class="vh-100">
 
-  <div class="container col-md-7 col-xl-9 py-3">
+  <div class="container col-md-12 col-xl-9 py-3" style="display: flex; justify-content: space-between;">
     <a class="btn btn-danger btn-lg" href="{{ route('tasks.create') }}">TODOの追加</a>
+    <a class="btn btn-outline-success btn-lg" href="{{ route('tasks.index') }}"><i class="fa-regular fa-circle-check"></i> 未完了のTODO</a>
   </div>
 
 
@@ -22,7 +23,7 @@
                 <tr>
                   <th scope="col">未完了にする</th>
                   <th scope="col">TODO</th>
-                  <th scope="col">重要度</th>
+                  <th scope="col">@sortablelink('importance_id', '重要度')</th>
                   <th scope="col">編集</th>
                   <th scope="col">削除</th>
                 </tr>

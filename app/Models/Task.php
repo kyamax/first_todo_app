@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class Task extends Model
 {
     use HasFactory;
+    use Sortable;
 
     protected $fillable = ["text", "title", "importance_id", "user_id", "check"];
-    // 配列で値を一括設定する
+    public $sortable = ["importance_id"];
 
     public function importance()
     {

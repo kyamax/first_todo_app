@@ -14,17 +14,20 @@ class TaskController extends Controller
     {
         $search = $request->input('search');
 
+        $sort = $request->input('sort');
+
         $tasks = Task::where([
             ["user_id", Auth::user()->id],
             ["check", false],
             ['title', 'LIKE', "%{$search}%"]
-        ])->orderBy('created_at', 'desc')->paginate(7);
+        ])->sortable()->orderBy('created_at', 'desc')->paginate(7);
+        // )->sortBy('importance_id');
 
 
         $user = Auth::user();
         $importances = Importance::all();
 
-        return view("tasks.index", ["tasks" => $tasks, "importances" => $importances, "user" => $user, "search" => $search]);
+        return view("tasks.index", ["tasks" => $tasks, "importances" => $importances, "user" => $user, "search" => $search, "sort" => $sort]);
 
     }
 
@@ -99,7 +102,7 @@ class TaskController extends Controller
         $tasks = Task::where([
             ["user_id", Auth::user()->id],
             ["check", true]
-        ])->orderBy('created_at', 'desc')->paginate(7);
+        ])->sortable()->orderBy('created_at', 'desc')->paginate(7);
 
         $user = Auth::user();
         $importances = Importance::all();
@@ -107,17 +110,4 @@ class TaskController extends Controller
         return view("tasks.done", ["tasks" => $tasks, "importances" => $importances, "user" => $user]);
         
     }
-
-    // public function search(Request $request)
-    // {
-    //     $search = $request->request('search');
-    //     if ($search !== null) {
-    //         $escape_word = addcslashes($search, '\\_%');
-    //         $tasks = Task::where('title', 'like', '%' . $escape_word . '%')->get();
-    //     } else {
-    //         $tasks = Task::all();
-    //     }
-
-    //     return view('tasks.index', ['tasks' => $tasks]);
-    // }
 }
