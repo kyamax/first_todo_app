@@ -15,6 +15,7 @@ class TaskController extends Controller
         $tasks = Task::where([
             ["user_id", Auth::user()->id],
             ["check", false],
+            // ["title", 'LIKE', "request('search')"]
             [function ($query){
                 if ($search = request('search')) {
                     $query->where('title', 'LIKE', "%{$search}%");
