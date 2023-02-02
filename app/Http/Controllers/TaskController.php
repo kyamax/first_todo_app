@@ -13,7 +13,6 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-
         $sort = $request->input('sort');
 
         $tasks = Task::where([
@@ -21,7 +20,6 @@ class TaskController extends Controller
             ["check", false],
             ['title', 'LIKE', "%{$search}%"]
         ])->sortable()->orderBy('created_at', 'desc')->paginate(7);
-        // )->sortBy('importance_id');
 
 
         $user = Auth::user();
