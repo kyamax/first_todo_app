@@ -20,7 +20,7 @@
 
   <div class="col-md-4 mt-3">
     <label for="formGroupExampleInput" class="form-label">内容</label>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="詳しい内容" name="text" value="{{ old('text') }}">
+    <textarea type="textarea" class="form-control" id="formGroupExampleInput" placeholder="詳しい内容" name="text" value="{{ old('text') }}"></textarea>
   </div>
 
   <div class="col-md-4 mt-3">
