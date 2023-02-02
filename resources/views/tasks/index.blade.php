@@ -34,6 +34,7 @@
                 </tr>
               </thead>
               <tbody>
+                
                 @foreach($tasks as $task)
                 <tr class="fw-normal">
                   <td class="align-middle">
@@ -61,7 +62,9 @@
                   </td>
                 </tr>
                 @endforeach
+                
               </tbody>
+
             </table>
             <div class="mt-3">
               {{ $tasks->appends(request()->query())->links('pagination::bootstrap-5') }}

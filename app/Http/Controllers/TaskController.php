@@ -39,7 +39,7 @@ class TaskController extends Controller
 
     public function store(StoreTaskRequest $request)
     {
-        $task = new Task($request->validated());
+        $task = new Task($request->all());
         $task->user_id = Auth::id();
         $task->save();
 
@@ -65,7 +65,7 @@ class TaskController extends Controller
     public function update(StoreTaskRequest $request, $id)
     {
         $task = Task::findOrFail($id);
-        $updateData = $request->validated();
+        $updateData = $request->all();
 
         $task->importance()->associate($updateData["importance_id"]);
         $task->update($updateData);
