@@ -22,6 +22,11 @@
           <div class="card-header p-3">
             <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>TODO List</h5>
           </div>
+          @if($result === false)
+            <div class="card-body h-auto" >
+              検索結果はありません
+            </div>
+          @else
           <div class="card-body h-auto" >
             <table class="table mb-0">
               <thead>
@@ -69,8 +74,9 @@
             <div class="mt-3">
               {{ $tasks->appends(request()->query())->links('pagination::bootstrap-5') }}
             </div>
+          
           </div>
-        
+          @endif
         </div>
         
       </div>

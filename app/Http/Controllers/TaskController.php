@@ -21,11 +21,13 @@ class TaskController extends Controller
             ['title', 'LIKE', "%{$search}%"]
         ])->sortable()->orderBy('created_at', 'desc')->paginate(7);
 
+        $searchTitle = Task::get("title");
+        $result = strpos($searchTitle, $search);
 
         $user = Auth::user();
         $importances = Importance::all();
 
-        return view("tasks.index", ["tasks" => $tasks, "importances" => $importances, "user" => $user, "search" => $search, "sort" => $sort]);
+        return view("tasks.index", ["tasks" => $tasks, "importances" => $importances, "user" => $user, "search" => $search, "sort" => $sort, "result" => $result]);
 
     }
 
