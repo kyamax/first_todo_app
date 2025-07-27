@@ -10,7 +10,7 @@
 
   <div class="container col-md-12 col-xl-9">
     <form class="d-flex" action="{{ route('tasks.index') }}" method="GET">
-      <input type="search" class="form-control me-2" name="search"  value="{{ $search }}" placeholder="キーワードを入力">
+      <input type="search" class="form-control me-2" name="search"  value="{{ $search ?? '' }}" placeholder="キーワードを入力">
       <input type="submit" class="btn btn-outline-primary flex-shrink-0" value="検索">
     </form>
   </div>
@@ -22,11 +22,6 @@
           <div class="card-header p-3">
             <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>TODO List</h5>
           </div>
-          @if($result === false)
-            <div class="card-body h-auto" >
-              検索結果はありません
-            </div>
-          @else
           <div class="card-body h-auto" >
             <table class="table mb-0">
               <thead>
@@ -39,7 +34,7 @@
                 </tr>
               </thead>
               <tbody>
-                
+              @if(isset($tasks) && $tasks->count() > 0)
                 @foreach($tasks as $task)
                 <tr class="fw-normal">
                   <td class="align-middle">
@@ -67,16 +62,20 @@
                   </td>
                 </tr>
                 @endforeach
-                
+              @else
+                <div class="card-body">TODOは見つかりませんでした</div>
+              @endif
               </tbody>
 
             </table>
-            <div class="mt-3">
-              {{ $tasks->appends(request()->query())->links('pagination::bootstrap-5') }}
-            </div>
+
+            @if(isset($tasks))
+              <div class="mt-3">
+                {{ $tasks->appends(request()->query())->links('pagination::bootstrap-5') }}
+              </div>
+            @endif
           
           </div>
-          @endif
         </div>
         
       </div>

@@ -12,24 +12,33 @@ class TaskController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->input('search');
-        $sort = $request->input('sort');
+        $search = $request->input('search', ''); // ← 空文字で初期化しておく
+        $sort = $request->input('sort', '');
 
-        $tasks = Task::where([
-            ["user_id", Auth::user()->id],
-            ["check", false],
-            ['title', 'LIKE', "%{$search}%"]
-        ])->sortable()->orderBy('created_at', 'desc')->paginate(7);
+        $query = Task::where('user_id', Auth::id())
+                    ->where('check', false);
 
-        $searchTitle = Task::get("title");
-        $result = strpos($searchTitle, $search);
+        if ($search !== '') {
+            $query->where('title', 'LIKE', "%{$search}%");
+        }
+
+        $tasks = $query->sortable()
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(7)
+                    ->withQueryString(); // ← ページネーションで検索条件維持
 
         $user = Auth::user();
         $importances = Importance::all();
 
-        return view("tasks.index", ["tasks" => $tasks, "importances" => $importances, "user" => $user, "search" => $search, "sort" => $sort, "result" => $result]);
-
+        return view('tasks.index', [
+            'tasks' => $tasks,
+            'importances' => $importances,
+            'user' => $user,
+            'search' => $search,
+            'sort' => $sort
+        ]);
     }
+
 
 
     public function create()
